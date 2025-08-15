@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -38,18 +39,18 @@ public class Customer {
     private String postalCode;
     @Column(name = "country", length = 50, nullable = false)
     private String country;
-    @Column(name = "creditLimit", nullable = true)
-    private Double creditLimit;
+    @Column(name = "creditLimit", precision = 10, scale = 2, nullable = true)
+    private BigDecimal creditLimit;
 
     @ManyToOne
     @JoinColumn(name = "salesRepEmployeeNumber", referencedColumnName = "employeeNumber", nullable = true)
     private Employe salesRepEmployeeNumber;
 
     @OneToMany(mappedBy = "customer")
-    @JoinColumn(name = "customerNumber", referencedColumnName = "customerNumber", insertable = false, updatable = false)
+    //@JoinColumn(name = "customerNumber", referencedColumnName = "customerNumber", insertable = false, updatable = false)
     private List<Payment> payments;
 
     @OneToMany(mappedBy = "customer")
-    @JoinColumn(name = "customerNumber", referencedColumnName = "customerNumber", insertable = false, updatable = false)
+    //@JoinColumn(name = "customerNumber", referencedColumnName = "customerNumber", insertable = false, updatable = false)
     private List<Order> orders;
 }

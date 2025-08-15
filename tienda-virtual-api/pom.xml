@@ -70,7 +70,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--- Dependencia para variables .env.local -->
+        <!--- Dependencia para variables .env -->
         <dependency>
             <groupId>me.paulschwarz</groupId>
             <artifactId>spring-dotenv</artifactId>

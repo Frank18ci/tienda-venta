@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.tienda.tiendavirtualapi.model.utils.PaymentId;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -26,8 +27,8 @@ public class Payment {
     @Temporal(TemporalType.DATE)
     @Column(name = "paymentDate")
     private Date paymentDate;
-    @Column(name = "amount", nullable = false)
-    private Double amount;
+    @Column(name = "amount", precision = 10, scale = 2, nullable = false)
+    private BigDecimal amount;
     @ManyToOne
     @JoinColumn(name = "customerNumber", referencedColumnName = "customerNumber", insertable = false, updatable = false)
     private Customer customer;

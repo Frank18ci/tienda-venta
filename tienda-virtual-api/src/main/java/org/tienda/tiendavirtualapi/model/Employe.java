@@ -30,11 +30,11 @@ public class Employe {
     private String officeCode;
 
     @ManyToOne
-    @Column(name = "reportsTo", nullable = true)
+    @JoinColumn(name = "reportsTo", referencedColumnName = "employeeNumber", nullable = true)
     private Employe reportsTo;
 
     @ManyToOne
-    @Column(name = "jobTitle", length = 50, nullable = false)
+    @JoinColumn(name = "jobTitle", referencedColumnName = "officeCode", nullable = false)
     private Office jobTitle;
 
     @OneToMany(mappedBy = "salesRepEmployeeNumber")

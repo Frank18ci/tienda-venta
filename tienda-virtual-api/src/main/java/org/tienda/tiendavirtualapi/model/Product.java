@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,15 +26,15 @@ public class Product {
     private String productVendor;
     @Column(name = "productDescription", columnDefinition = "TEXT", nullable = false)
     private String productDescription;
-    @Column(name = "quantityInStock", nullable = false)
+    @Column(name = "quantityInStock", columnDefinition = "SMALLINT", nullable = false)
     private Integer quantityInStock;
-    @Column(name = "buyPrice", nullable = false)
-    private Double buyPrice;
-    @Column(name = "MSRP", nullable = false)
-    private Double msrp;
+    @Column(name = "buyPrice", precision = 10, scale = 2, nullable = false)
+    private BigDecimal buyPrice;
+    @Column(name = "MSRP", precision = 10, scale = 2, nullable = false)
+    private BigDecimal msrp;
 
     @ManyToOne
-    @Column(name = "productLine", length = 50, nullable = false)
+    @JoinColumn(name = "productLine", referencedColumnName = "productLine", nullable = false)
     private ProductLine productLine;
 
 }

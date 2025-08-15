@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.tienda.tiendavirtualapi.model.utils.OrderDetailId;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,9 +25,9 @@ public class OrderDetail {
     private String productCode;
     @Column(name = "quantityOrdered", nullable = false)
     private Integer quantityOrdered;
-    @Column(name = "priceEach", nullable = false)
-    private Double priceEach;
-    @Column(name = "orderLineNumber", nullable = false)
+    @Column(name = "priceEach", precision = 10, scale = 2, nullable = false)
+    private BigDecimal priceEach;
+    @Column(name = "orderLineNumber", columnDefinition = "SMALLINT", nullable = false)
     private Integer orderLineNumber;
 
     @ManyToOne
