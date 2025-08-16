@@ -10,7 +10,7 @@ import org.tienda.tiendavirtualapi.service.ProductService;
 @RestController
 @RequestMapping("productos")
 @RequiredArgsConstructor
-public class ProductoController {
+public class ProductController {
     private final ProductService productService;
 
     @GetMapping

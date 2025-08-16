@@ -6,7 +6,7 @@ import org.tienda.tiendavirtualapi.exception.types.ResourceFound;
 import org.tienda.tiendavirtualapi.exception.types.ResourceNotFound;
 import org.tienda.tiendavirtualapi.model.Product;
 import org.tienda.tiendavirtualapi.model.dto.ProductDto;
-import org.tienda.tiendavirtualapi.model.utils.mapper.ProductoMapper;
+import org.tienda.tiendavirtualapi.model.utils.mapper.ProductMapper;
 import org.tienda.tiendavirtualapi.repository.ProductRepository;
 import org.tienda.tiendavirtualapi.service.ProductService;
 
@@ -14,13 +14,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductoServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
 
     @Override
     public List<ProductDto> getAllProducts() {
-        return ProductoMapper.toDtoList(productRepository.findAll());
+        return ProductMapper.toDtoList(productRepository.findAll());
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ProductoServiceImpl implements ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("Product not found with id: " + id));
 
-        return ProductoMapper.toDto(product);
+        return ProductMapper.toDto(product);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ProductoServiceImpl implements ProductService {
             throw new ResourceFound("Product already exists with code: " + product.getProductCode());
         }
         Product createdProduct = productRepository.save(product);
-        return ProductoMapper.toDto(createdProduct);
+        return ProductMapper.toDto(createdProduct);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ProductoServiceImpl implements ProductService {
         existingProduct.setBuyPrice(product.getBuyPrice());
         existingProduct.setMsrp(product.getMsrp());
         Product updatedProduct = productRepository.save(existingProduct);
-        return ProductoMapper.toDto(updatedProduct);
+        return ProductMapper.toDto(updatedProduct);
     }
 
     @Override

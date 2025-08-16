@@ -5,7 +5,7 @@ import org.tienda.tiendavirtualapi.model.dto.ProductDto;
 
 import java.util.List;
 
-public class ProductoMapper {
+public class ProductMapper {
     public static ProductDto toDto(Product product){
         return ProductDto.builder()
                 .productCode(product.getProductCode())
@@ -20,7 +20,7 @@ public class ProductoMapper {
     }
     public static List<ProductDto> toDtoList(List<Product> products) {
         return products.stream()
-                .map(ProductoMapper::toDto)
+                .map(ProductMapper::toDto)
                 .toList();
     }
 }
