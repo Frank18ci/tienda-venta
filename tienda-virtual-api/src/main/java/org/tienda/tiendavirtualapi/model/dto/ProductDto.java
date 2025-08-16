@@ -21,21 +21,8 @@ public class ProductDto {
     private String productDescription;
     private Integer quantityInStock;
     private BigDecimal buyPrice;
-    private BigDecimal MSRP;
+    private BigDecimal msrp;
     //private ProductLineDto productLine;
 
-    public static ProductDto fromEntity(Product product){
-        return ProductDto.builder()
-                .productCode(product.getProductCode())
-                .productName(product.getProductName())
-                .productLine(product.getProductLine().getProductLine())
-                .productScale(product.getProductScale())
-                .productVendor(product.getProductVendor())
-                .productDescription(product.getProductDescription())
-                .quantityInStock(product.getQuantityInStock())
-                .buyPrice(product.getBuyPrice())
-                .MSRP(product.getMsrp())
-                .build();
 
-    }
 }

@@ -6,6 +6,7 @@ import org.tienda.tiendavirtualapi.exception.types.ResourceFound;
 import org.tienda.tiendavirtualapi.exception.types.ResourceNotFound;
 import org.tienda.tiendavirtualapi.model.Product;
 import org.tienda.tiendavirtualapi.model.dto.ProductDto;
+import org.tienda.tiendavirtualapi.model.utils.mapper.ProductoMapper;
 import org.tienda.tiendavirtualapi.repository.ProductRepository;
 import org.tienda.tiendavirtualapi.service.ProductService;
 
@@ -19,7 +20,7 @@ public class ProductoServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getAllProducts() {
-        return productRepository.findAll().stream().map(ProductDto::fromEntity).toList();
+        return ProductoMapper.toDtoList(productRepository.findAll());
     }
 
     @Override
@@ -27,21 +28,22 @@ public class ProductoServiceImpl implements ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("Product not found with id: " + id));
 
-        return ProductDto.fromEntity(product);
+        return ProductoMapper.toDto(product);
     }
 
     @Override
-    public Product createProduct(Product product) {
+    public ProductDto createProduct(Product product) {
         Product existingProduct = productRepository.findById(product.getProductCode())
                 .orElse(null);
         if (existingProduct != null) {
             throw new ResourceFound("Product already exists with code: " + product.getProductCode());
         }
-        return productRepository.save(product);
+        Product createdProduct = productRepository.save(product);
+        return ProductoMapper.toDto(createdProduct);
     }
 
     @Override
-    public Product updateProduct(String id, Product product) {
+    public ProductDto updateProduct(String id, Product product) {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("Product not found with id: " + id));
 
@@ -53,7 +55,8 @@ public class ProductoServiceImpl implements ProductService {
         existingProduct.setQuantityInStock(product.getQuantityInStock());
         existingProduct.setBuyPrice(product.getBuyPrice());
         existingProduct.setMsrp(product.getMsrp());
-        return productRepository.save(existingProduct);
+        Product updatedProduct = productRepository.save(existingProduct);
+        return ProductoMapper.toDto(updatedProduct);
     }
 
     @Override
