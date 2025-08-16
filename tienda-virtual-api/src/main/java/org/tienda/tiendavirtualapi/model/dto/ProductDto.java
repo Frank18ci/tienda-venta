@@ -15,27 +15,13 @@ import java.math.BigDecimal;
 public class ProductDto {
     private String productCode;
     private String productName;
-    private String productLine;
     private String productScale;
     private String productVendor;
     private String productDescription;
     private Integer quantityInStock;
     private BigDecimal buyPrice;
-    private BigDecimal MSRP;
-    //private ProductLineDto productLine;
+    private BigDecimal msrp;
+    private ProductLineDto productLine;
 
-    public static ProductDto fromEntity(Product product){
-        return ProductDto.builder()
-                .productCode(product.getProductCode())
-                .productName(product.getProductName())
-                .productLine(product.getProductLine().getProductLine())
-                .productScale(product.getProductScale())
-                .productVendor(product.getProductVendor())
-                .productDescription(product.getProductDescription())
-                .quantityInStock(product.getQuantityInStock())
-                .buyPrice(product.getBuyPrice())
-                .MSRP(product.getMsrp())
-                .build();
 
-    }
 }

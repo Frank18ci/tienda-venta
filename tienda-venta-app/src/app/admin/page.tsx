@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Dialog from "./components/Dialog";
 
 const listAllProducts = async () => {
   const url = process.env.API_URL + "/productos";
@@ -47,7 +48,7 @@ export default async function Home() {
           </div>
         </div>
         <table className="min-w-full border-collapse border border-gray-200">
-          <thead>
+          <thead className="bg-slate-600">
             <tr>
               <th className="border border-gray-200 p-2">Name</th>
               <th className="border border-gray-200 p-2">Description</th>
@@ -58,7 +59,7 @@ export default async function Home() {
               <th className="border border-gray-200 p-2">Opciones</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-slate-800">
             {products.map((product) => (
               <tr key={product.productCode} className="border border-gray-200">
                 <td className="border border-gray-200 p-2">
@@ -93,6 +94,7 @@ export default async function Home() {
           </tbody>
         </table>
       </div>
+      <Dialog />
     </div>
   );
 }
