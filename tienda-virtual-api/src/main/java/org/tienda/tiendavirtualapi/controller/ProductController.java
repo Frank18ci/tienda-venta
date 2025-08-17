@@ -8,7 +8,7 @@ import org.tienda.tiendavirtualapi.model.Product;
 import org.tienda.tiendavirtualapi.service.ProductService;
 
 @RestController
-@RequestMapping("productos")
+@RequestMapping("products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
@@ -16,6 +16,15 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<?> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(productService.getAllProducts());
+    }
+    @GetMapping("/page")
+    public ResponseEntity<?> getAllPaginated(
+            @RequestParam(defaultValue = "") String productName,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "productCode") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByName(productName, page, size, sortBy, sortDirection));
     }
 
     @GetMapping("/{id}")
