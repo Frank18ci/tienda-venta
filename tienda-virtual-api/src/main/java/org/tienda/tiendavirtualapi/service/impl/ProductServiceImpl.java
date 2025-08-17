@@ -1,6 +1,10 @@
 package org.tienda.tiendavirtualapi.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.tienda.tiendavirtualapi.exception.types.ResourceFound;
 import org.tienda.tiendavirtualapi.exception.types.ResourceNotFound;
@@ -21,6 +25,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAllProducts() {
         return ProductMapper.toDtoList(productRepository.findAll());
+    }
+
+    @Override
+    public Page<ProductDto> getProductsByName(String productName, int page, int size, String sortBy, String direction) {
+        Sort.Direction sortDirection = Sort.Direction.DESC;
+        if (direction.equalsIgnoreCase("asc")) {
+            sortDirection = Sort.Direction.ASC;
+        }
+        Sort sort = Sort.by(sortDirection, sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Product> productPage = productRepository.findByProductNameContaining(productName, pageable);
+        return productPage.map(ProductMapper::toDto);
     }
 
     @Override
