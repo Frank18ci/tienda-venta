@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Dialog from "./components/Dialog";
+import NuevoProducto from "./components/NuevoProducto";
 
 const listAllProducts = async () => {
-  const url = process.env.API_URL + "/productos";
+  const url = process.env.API_URL + "/products";
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch products");
@@ -39,12 +39,7 @@ export default async function Home() {
             </form>
           </div>
           <div>
-            <Link
-              href="/admin/productos/nuevo"
-              className="bg-blue-500 text-white p-2 rounded"
-            >
-              Agregar Producto
-            </Link>
+            <NuevoProducto />
           </div>
         </div>
         <table className="min-w-full border-collapse border border-gray-200">
@@ -94,7 +89,7 @@ export default async function Home() {
           </tbody>
         </table>
       </div>
-      <Dialog />
+      
     </div>
   );
 }
