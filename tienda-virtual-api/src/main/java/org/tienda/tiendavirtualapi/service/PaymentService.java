@@ -10,6 +10,6 @@ public interface PaymentService {
     List<PaymentDto> getAllPayments();
     PaymentDto getPaymentById(PaymentId id);
     PaymentDto createPayment(Payment payment);
-    PaymentDto updatePayment(Integer id, Payment payment);
+    PaymentDto updatePayment(PaymentId id, Payment payment);
     void deletePayment(PaymentId id);
 }

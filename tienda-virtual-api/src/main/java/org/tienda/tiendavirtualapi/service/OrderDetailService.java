@@ -10,6 +10,6 @@ public interface OrderDetailService {
     List<OrderDetailDto> getAllOrderDetails();
     OrderDetailDto getOrderDetailById(OrderDetailId id);
     OrderDetailDto createOrderDetail(OrderDetail orderDetail);
-    OrderDetailDto updateOrderDetail(Integer id, OrderDetail orderDetail);
+    OrderDetailDto updateOrderDetail(OrderDetailId id, OrderDetail orderDetail);
     void deleteOrderDetail(OrderDetailId id);
 }

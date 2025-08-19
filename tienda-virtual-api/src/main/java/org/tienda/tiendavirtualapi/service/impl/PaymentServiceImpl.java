@@ -34,8 +34,8 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentDto updatePayment(Integer id, Payment payment) {
-        Payment existingPayment = paymentRepository.findById(new PaymentId(id, payment.getCheckNumber()))
+    public PaymentDto updatePayment(PaymentId id, Payment payment) {
+        Payment existingPayment = paymentRepository.findById(new PaymentId(id.getCustomerNumber(), payment.getCheckNumber()))
                 .orElseThrow(() -> new ResourceNotFound("Payment not found with id: " + id));
 
         existingPayment.setCustomerNumber(payment.getCustomerNumber());
