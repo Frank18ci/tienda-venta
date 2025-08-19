@@ -34,7 +34,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public OrderDetailDto updateOrderDetail(Integer id, OrderDetail orderDetail) {
+    public OrderDetailDto updateOrderDetail(OrderDetailId id, OrderDetail orderDetail) {
         OrderDetail existingOrderDetail = orderDetailRepository.findById(new OrderDetailId(orderDetail.getOrderNumber(), orderDetail.getProductCode()))
                 .orElseThrow(() -> new ResourceNotFound("Order detail not found with id: " + orderDetail.getOrderNumber() + ", " + orderDetail.getProductCode()));
 
